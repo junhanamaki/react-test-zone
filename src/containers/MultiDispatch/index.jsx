@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import FlipMove from 'react-flip-move';
 
+import List from './List';
 import { add } from 'store/domain/items/actions';
 import { selectAll } from 'store/domain/items/selectors';
 
@@ -16,19 +16,19 @@ class MultiDispatch extends Component {
   constructor(...args) {
     super(...args);
 
-    console.log('constructor');
+    console.log('Parent.constructor');
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
+    console.log('Parent.componentDidMount');
   }
 
   componentWillReceiveProps() {
-    console.log('componentWillReceiveProps');
+    console.log('Parent.componentWillReceiveProps');
   }
 
   componentDidUpdate() {
-    console.log('componentDidUpdate');
+    console.log('Parent.componentDidUpdate');
   }
 
   handleClick = () => {
@@ -40,8 +40,6 @@ class MultiDispatch extends Component {
   };
 
   render() {
-    const { props: { items } } = this;
-
     return (
       <div>
         <div>
@@ -52,9 +50,8 @@ class MultiDispatch extends Component {
           <button onClick={this.handleClick}>Add items</button>
         </div>
         <div>
-          <FlipMove>
-            {items.map(({ id }) => <div key={id}>{id}</div>)}
-          </FlipMove>
+          <span>Current count: {this.props.items.length}</span>
+          <List />
         </div>
       </div>
     );
